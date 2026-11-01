@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#174d3e"><meta name="description" content="Seu cinema, seu inglês. Um estúdio local para treinar escuta, escrita e tradução.">
+  <title>English Studio · Aprenda com cada cena</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml"><link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+<aside class="sidebar">
+  <a class="brand" href="/" aria-label="English Studio, início"><span class="brand-icon">e<span>↗</span></span><span>english<span class="brand-light">studio</span></span></a>
+  <div class="workspace-label">SEU ESPAÇO DE APRENDIZADO</div>
+  <nav aria-label="Principal">
+    <button class="nav-item active" id="nav-study"><span>▣</span> Estúdio de estudo <span class="nav-dot"></span></button>
+    <button class="nav-item" id="nav-history"><span>↺</span> Meu progresso</button>
+  </nav>
+  <div class="library-heading"><span>MINHA BIBLIOTECA</span><button id="add-library" class="icon-button" title="Importar vídeo" aria-label="Importar vídeo">+</button></div>
+  <div id="library" class="library"><p class="library-empty">Suas próximas histórias<br>começam aqui.</p></div>
+  <button class="library-add" id="import-side">+ Adicionar um vídeo</button>
+  <div class="sidebar-bottom"><div class="local-badge"><span class="status-dot"></span> Um espaço só seu <small>Vídeos e estudos no seu computador.</small></div><button id="open-settings" class="nav-item"><span>⚙</span> Configurações</button><div class="profile"><span class="avatar">EU</span><div>Meu aprendizado<small>Um pouco melhor a cada cena</small></div></div></div>
+</aside>
+<main>
+  <header class="topbar"><div class="breadcrumb">Meu espaço <span>/</span> <strong id="page-label">Estúdio de estudo</strong></div><span id="connection" class="connection"><span class="status-dot"></span> Verificando IA local</span></header>
+  <section id="study-view">
+    <div class="page-heading"><div><div class="eyebrow">LISTEN. WRITE. UNDERSTAND.</div><h1>Aprenda com cada cena<span>.</span></h1><p>Histórias que você gosta. Um inglês cada vez mais seu.</p></div><button id="import-top" class="button primary">+ Importar vídeo</button></div>
+    <div class="flow"><div class="flow-step current"><span>01</span> Escolha uma cena</div><i></i><div class="flow-step"><span>02</span> Escute e escreva</div><i></i><div class="flow-step"><span>03</span> Aprenda com a correção</div></div>
+    <label class="mobile-library-label">Minha biblioteca<select id="mobile-library" aria-label="Vídeo da biblioteca"></select></label>
+    <div id="job-banner" class="job-banner" hidden aria-live="polite"></div>
+    <div class="studio-grid">
+      <section class="watch-column" aria-label="Vídeo e cena">
+        <div class="card video-card">
+          <div class="card-heading"><div><span class="tiny-label">SUA SALA DE CINEMA</span><h2 id="movie-title">Uma nova história começa aqui</h2></div><span id="movie-length" class="pill">Seu vídeo</span></div>
+          <div class="video-stage" id="dropzone">
+            <video id="player" controls playsinline preload="metadata" hidden></video>
+            <div id="video-empty" class="video-empty"><div class="cinema-mark"><svg viewBox="0 0 80 80" aria-hidden="true"><rect x="9" y="25" width="62" height="43" rx="8"/><path d="M10 25 7 13 66 3l3 12Z M21 11l11 9m8-12 11 9m8-12 10 8"/><path class="play-shape" d="m34 37 17 10-17 10Z"/></svg></div><h3>Dê play no seu inglês.</h3><p>Arraste um filme, uma série ou um vídeo.<br>Transforme suas cenas favoritas em aprendizado.</p><button id="import-stage" class="button light">Escolher um vídeo <span>↗</span></button><small>MP4, MKV, MOV, AVI e outros · até 20 GB</small></div>
+            <div id="processing" class="processing" hidden><div class="spinner"></div><h3 id="processing-title">Preparando sua história</h3><p id="processing-text"></p><progress id="processing-progress" max="100" value="0"></progress><button id="retry" class="button light" hidden>Tentar novamente</button><button id="cancel" class="text-button">Cancelar processamento</button></div>
+          </div>
+          <div class="player-tools"><button id="play-scene" class="text-button" disabled>▶ Reproduzir cena</button><label class="compact">Velocidade <select id="speed" aria-label="Velocidade"><option value="0.5">0,5×</option><option value="0.75">0,75×</option><option value="1" selected>1×</option><option value="1.25">1,25×</option></select></label><label class="check"><input id="loop" type="checkbox"> Repetir</label><label class="compact subtitle-label">Legendas <select id="subtitles" aria-label="Legendas"><option value="off">Desligadas</option><option value="en">Inglês</option><option value="pt">Português</option></select></label></div>
+        </div>
+        <div class="card scene-card"><div class="section-line"><h2><span class="step-label">01</span> Seu trecho de estudo</h2><span id="scene-duration" class="muted">Até 3 minutos</span></div><div class="scene-inputs"><label>INÍCIO<div class="time-wrap"><span>◷</span><input id="scene-start" value="00:00" aria-label="Início da cena" placeholder="00:00"></div></label><span class="range-line">→</span><label>FIM<div class="time-wrap"><span>◷</span><input id="scene-end" value="01:00" aria-label="Fim da cena" placeholder="01:00"></div></label><button id="set-start" class="button secondary" disabled>Usar posição atual</button></div><div class="scene-tip"><span>✧</span> Comece com 15 a 30 segundos. Pequenas cenas, grandes descobertas.</div></div>
+        <div class="resources"><button id="open-transcript" disabled><span>≡</span><div>Diálogos do vídeo<small>Consultar e revisar transcrição</small></div><b>↗</b></button><button id="open-export" disabled><span>↓</span><div>Leve seu estudo com você<small>Exportar diálogos em PDF</small></div><b>↗</b></button></div>
+      </section>
+      <section class="card exercise-card" aria-label="Exercício">
+        <div class="exercise-top"><span class="tiny-label">SEU MOMENTO DE PRATICAR</span><span class="pill pale">✦ Aprender fazendo</span></div>
+        <h2>O que você ouviu?</h2><p class="muted intro">Escute com atenção. Depois, dê o seu melhor.</p>
+        <div class="tabs" role="tablist" aria-label="Tipo de exercício"><button id="mode-dictation" role="tab" aria-selected="true" class="active">Ditado em inglês</button><button id="mode-translation" role="tab" aria-selected="false">Tradução em português</button></div>
+        <label id="answer-label" for="answer" class="answer-label">Escreva o diálogo em inglês</label><div class="answer-box"><textarea id="answer" maxlength="5000" placeholder="I think they said…" spellcheck="false"></textarea><div class="answer-meta"><span id="answer-hint">Tudo bem não entender de primeira.</span><span id="char-count">0 / 5000</span></div></div>
+        <div class="voice-row" id="voice-row"><button id="record" class="text-button">♩ Gravar resposta</button><button id="upload-audio" class="text-button">↑ Enviar áudio</button></div><p id="voice-note" class="small muted" hidden></p>
+        <label class="check explain-check"><input type="checkbox" id="explain" checked> Incluir explicação do professor</label>
+        <button id="evaluate" class="button primary evaluate-button" disabled>Corrigir minha resposta <span>→</span></button>
+        <button id="reveal" class="text-button reveal-button" disabled>◉ Mostrar o diálogo de referência</button>
+        <div id="reference-box" class="reference-box" hidden><span class="tiny-label">TRANSCRIÇÃO DE REFERÊNCIA</span><p id="reference-text"></p><small>Gerada automaticamente. Encontrou uma falha? Revise em “Diálogos do vídeo”.</small></div>
+        <div class="teacher-note"><span>✧</span><div>Mais que uma nota.<p>Entenda cada palavra, descubra expressões e aprenda o porquê de cada correção.</p></div></div>
+      </section>
+    </div>
+    <section id="result" class="card result-card" hidden aria-live="polite"></section>
+    <footer class="page-footer"><span>ENGLISH STUDIO</span> Um diálogo de cada vez.</footer>
+  </section>
+  <section id="history-view" hidden><div class="page-heading"><div><div class="eyebrow">CADA TENTATIVA CONTA</div><h1>Seu inglês em movimento<span>.</span></h1><p>Revisite seus exercícios e veja o que já aprendeu.</p></div></div><div id="history-stats" class="stats"></div><div id="history-list"></div></section>
+</main>
+<input type="file" id="video-file" accept=".mp4,.mkv,.avi,.mov,.webm,.m4v,.wmv,.mpeg,.mpg,.ts,.m2ts,.flv" hidden><input type="file" id="audio-file" accept="audio/*,.webm,.mp4" hidden>
+<div id="toast" role="status" hidden></div>
+<dialog id="settings-dialog"><div class="dialog-heading"><div><span class="tiny-label">NO SEU COMPUTADOR</span><h2>Seu estúdio, do seu jeito</h2></div><button class="icon-button close-dialog" aria-label="Fechar">×</button></div><form id="settings-form"><label>Professor local (Ollama)<select id="model-select"></select></label><p class="small muted">Somente modelos locais instalados. Nenhum vídeo ou resposta é enviado a serviços de IA externos.</p><label>Precisão da transcrição<select id="whisper-select"><option value="tiny.en">Tiny · mais leve, menos preciso</option><option value="base.en">Base · equilíbrio para começar</option><option value="small.en">Small · mais preciso</option><option value="medium.en">Medium · maior consumo de memória</option><option value="large-v3">Large v3 · maior precisão, mais lento</option></select></label><label>Processamento de voz<select id="device-select"><option value="cpu">CPU · compatível, sem configuração extra</option><option value="cuda">NVIDIA / CUDA · requer CUDA 12 e cuDNN 9</option></select></label><p class="small muted">O modelo Whisper é baixado no primeiro uso. Depois do download, a transcrição funciona offline. A análise reconhece o áudio; não interpreta imagens nem identifica personagens.</p><div id="settings-status" class="notice"></div><button type="submit" class="button primary">Salvar preferências</button></form></dialog>
+<dialog id="transcript-dialog" class="wide-dialog"><div class="dialog-heading"><div><span class="tiny-label">OUÇA. CONFIRA. APRENDA.</span><h2>Diálogos do vídeo</h2></div><button class="icon-button close-dialog" aria-label="Fechar">×</button></div><p class="muted small">A transcrição automática pode errar. Edite uma fala para corrigir a referência. Uma fala editada passa a ser usada inteira quando cruza os limites da cena.</p><input id="transcript-search" class="search" type="search" placeholder="Buscar uma palavra ou expressão…" aria-label="Buscar nos diálogos"><div id="transcript-list"></div></dialog>
+<dialog id="export-dialog"><div class="dialog-heading"><div><span class="tiny-label">PARA REVISITAR DEPOIS</span><h2>Seu roteiro de estudo</h2></div><button class="icon-button close-dialog" aria-label="Fechar">×</button></div><p class="muted">Exporte todos os diálogos, com horários e páginas organizadas para leitura.</p><label class="form-label">Idioma do PDF<select id="export-language"><option value="en">Inglês original</option><option value="pt">Português brasileiro</option><option value="bilingual">Bilíngue · inglês + português</option></select></label><div class="notice">Para português e bilíngue, traduza o filme completo primeiro. A tradução roda em segundo plano e pode demorar em filmes longos.</div><button id="translate-all" class="button secondary">Traduzir filme completo</button><div id="translation-status" class="small muted" aria-live="polite"></div><button id="download-pdf" class="button primary">↓ Baixar PDF completo</button></dialog>
+</body></html>
